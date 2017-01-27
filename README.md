@@ -33,7 +33,7 @@ You should be able to accomplish the following tasks:
 
 The outcome should look something like the animation below:
 
-![closest-blob](/misc/closest-blob.gif)
+![closest-blob](/misc/assignment.gif)
 
 Most of the points reported above have been already addressed in the tutorials, so you need to **fill in the missing gaps** highlighted by the comment `// FILL IN THE CODE`.
 
