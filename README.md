@@ -51,6 +51,7 @@ You will need to copy the included dataset **dataDisparity** in:
 ```
 cd $ROBOT_CODE
 $ cd datasets
+$ wget https://app.box.com/s/xzdqxe4h1md6hesc298royeb57xojjy2 
 $ unzip dataDisparity.zip
 ```
 # [How to complete the assignment](https://github.com/vvv-school/vvv-school.github.io/blob/master/instructions/how-to-complete-assignments.md)
