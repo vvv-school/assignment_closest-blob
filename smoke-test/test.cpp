@@ -160,8 +160,8 @@ public:
                     fs.release();
                     increment++;
 
-                    std::string imageFile = "image_file" + std::to_string(increment+1) + ".png";
-                    cv::imwrite(imageFile, hsv);
+                    //std::string imageFile = "image_file" + std::to_string(increment+1) + ".png";
+                    //cv::imwrite(imageFile, hsv);
 
                     //------------------------------------------------------------------------------------------ COMPARE HISTOGRAMS
 
