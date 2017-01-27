@@ -45,7 +45,7 @@ Once done, you can test your code in two ways:
     1. When you reply to rpc commands, we assume the robot has **finished the movement** (e.g. see [_this line_](./src/main.cpp#L226) in the `respond` method).
     1. The smoke-test will add a little random displacement to the initial position of the ball :wink:
 
-## Notes
+## IMPORTANT Notes
 
 You will need to copy the included dataset **dataDisparity** in:
 ```
