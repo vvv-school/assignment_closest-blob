@@ -6,6 +6,15 @@
 
 # Put here those instructions we need to execute before running the test
 
+yarp where
+if [ $? -eq 0 ]; then
+   kill_yarp="no"
+else
+   kill_yarp="yes"
+   yarpserver --write &
+   sleep 1
+fi
+
 yarpdataplayer &
 sleep 3
 echo "load $ROBOT_CODE/datasets/dataDisparity" | yarp rpc /yarpdataplayer/rpc:i
