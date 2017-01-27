@@ -160,7 +160,7 @@ public:
         cvCopy( &out, (IplImage *) outImage.getIplImage());
         outPort.write();
 
-        IplImage crop = imageOutput;
+        IplImage crop = inColour_cv;
         cropOutImage.resize(crop.width, crop.height);
         cvCopy( &crop, (IplImage *) cropOutImage.getIplImage());
         cropOutPort.write();

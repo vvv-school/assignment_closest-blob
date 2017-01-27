@@ -141,10 +141,14 @@ public:
 
                     //------------------------------------------------------------------------------------------ LOAD HISTOGRAMS
 
-                    std::string histogramFile = "histogram_file" + std::to_string(increment+1) + ".yml";
+                    std::ostringstream oss;
+                    oss << "histogram_file" << increment+1 << ".yml";
+
+                    std::string histogramFile = oss.str();
+                    RTF_TEST_REPORT(Asserter::format("HISTOGRAM NAME IS: %s\n", histogramFile.c_str()));
+                    //std::string histogramFile = "histogram_file" + std::to_string(increment+1) + ".yml";
                     std::string histogramPath = rf.findFile(histogramFile.c_str());
 
-                    RTF_TEST_REPORT(Asserter::format("HISTOGRAM NAME IS: %s\n", histogramFile.c_str()));
                     RTF_TEST_REPORT(Asserter::format("HISTOGRAM PATH IS: %s\n", histogramPath.c_str()));
                     // load file
                     cv::MatND hist_base;
