@@ -41,13 +41,12 @@ Once done, you can test your code in two ways:
 
 1. **Manually**: running the _yarpmanager scripts_ provided from within [**app/scripts**](./app/scripts).
 1. **Automatically**: [running the script **test.sh**](https://github.com/vvv-school/vvv-school.github.io/blob/master/instructions/how-to-run-smoke-tests.md) in the **smoke-test** directory. Take into account these important points:
-    1. We use .
-    1. When you reply to rpc commands, we assume the robot has **finished the movement** (e.g. see [_this line_](./src/main.cpp#L226) in the `respond` method).
-    1. The smoke-test will add a little random displacement to the initial position of the ball :wink:
+    1. The smoke test basically will automatically compare the content of the streamed bounding box historgrams in hsv at various frames with the base solution.
+    1. The test will pass if an overall comparison of the **five** histograms is above 90%.
 
 ## IMPORTANT Notes
 
-You will need to copy the included dataset **dataDisparity** in:
+You will need to run the dataset **dataDisparity** in:
 ```
 cd $ROBOT_CODE
 $ cd datasets
