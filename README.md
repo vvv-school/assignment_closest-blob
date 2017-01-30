@@ -29,7 +29,7 @@ You should be able to accomplish the following tasks:
 1. Get its **bounding box** (ROI-Region of Interest)
 1. Create a **cropped image** containing the **RGB image** of the ROI
 1. Fill in a **YARP bottle** as a **list**
-1. Finally, ask iCub to reach for the ball and **make it roll**.
+1. Finally, **stream** the resulting **image** out.
 
 The outcome should look something like the animation below:
 
