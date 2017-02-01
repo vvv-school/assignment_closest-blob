@@ -13,7 +13,7 @@
 ### Goals of this Assignment
 ######<div style="text-align: left;">Dataset </div>
 ![Logo](misc/dataset.gif)
-######<div style="text-align: left;">Dataset </div>
+######<div style="text-align: left;">Result </div>
 ![Logo](misc/assignment.gif)
 
 #HSLIDE
