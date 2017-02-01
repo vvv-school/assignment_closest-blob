@@ -12,9 +12,9 @@
 #VSLIDE
 ### Goals of this Assignment
 ######<div style="text-align: left;">Dataset </div>
-![Logo](assets/scene.png)
+![Logo](misc/dataset.png)
 ######<div style="text-align: left;">Dataset </div>
-![Logo](misc/dataset.gif)
+![Logo](misc/assignment.gif)
 
 #HSLIDE
 The End :)
