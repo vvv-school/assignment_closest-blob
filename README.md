@@ -1,6 +1,8 @@
 Robot vision with YARP & OpenCV Assignment
 ==========================
 
+[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/vvv-school/assignment_closest-blob/master?grs=github&t=moon)
+
 # Prerequisites
 By now, you should be familiar with playing around with images processing such as:
 - Getting images from streams
