@@ -15,7 +15,9 @@ By now, you should be familiar with playing around with images processing such a
 - Image Moments
 - Point Polygon Test
 
-more info can be taken from [here](http://docs.opencv.org/2.4/doc/tutorials/imgproc/table_of_content_imgproc/table_of_content_imgproc.html) or from the tutorials.
+documentation & examples on image filtering can be taken from [here](http://docs.opencv.org/3.1.0/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1) & [here](http://docs.opencv.org/2.4/doc/tutorials/imgproc/table_of_content_imgproc/table_of_content_imgproc.html) or from the tutorials. 
+
+more info & examples on 
 
 # Assignment
 As an assignment, we would like you to complete a module that employs what we have seen so far in order to extract the closest blob from a stream of disparity images. This will be useful for you when you will do the machine learning course.
