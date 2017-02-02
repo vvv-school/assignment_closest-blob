@@ -143,6 +143,12 @@ public:
         // 2 - create a cropped image containing the rgb roi
         // 3 - fill in a yarp bottle with the bounding box
 
+        //be aware that the expected bottle should be a list containing:
+        //
+        // (tl.x tl.y br.x br.y)
+        //
+        //where tl is top left and br - bottom right
+
         cvtColor(disp, disp, CV_GRAY2RGB);
 
         outTargets.clear();
