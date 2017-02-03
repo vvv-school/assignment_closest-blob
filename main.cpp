@@ -92,7 +92,7 @@ public:
     /********************************************************/
     void onRead( yarp::sig::ImageOf<yarp::sig::PixelMono> &dispImage )
     {
-
+        //FILL IN THE CODE
         // prepare the image ports and targets
         //read in from the rgb image something like: yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = inPort.read();
 
@@ -100,19 +100,17 @@ public:
 
         //Apply image processing techniques on the disparity image to smooth things out
 
-        //FILL IN THE CODE
-
         // Find the max value and its position and apply a threshold to remove the backgound
 
-        //FILL IN THE CODE
+        //....
 
         //Find the contour of the closest objects
 
-        //FILL IN THE CODE
+        //....
 
         // get moments and mass center
 
-        //FILL IN THE CODE
+        //....
 
         // optional hint: you could use pointPolygonTest and the previous maxvalue location to compare with all contours found and get the actual brightest one
 
