@@ -96,8 +96,12 @@ public:
         {
             yarp::sig::ImageOf<yarp::sig::PixelMono> *inDisp = dispPort.read(); //control image
             yarp::os::Bottle *pTarget=port.read(false);
+            
             if (pTarget != NULL)
             {
+                
+                RTF_ASSERT_ERROR_IF(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
+                
                 double tlx = pTarget->get(0).asList()->get(0).asDouble();
                 double tly = pTarget->get(0).asList()->get(1).asDouble();
                 double brx = pTarget->get(0).asList()->get(2).asDouble();
