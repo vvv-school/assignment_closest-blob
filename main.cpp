@@ -98,7 +98,7 @@ public:
 
         //convert from ImageOf to Mat
 
-        //Apply image processing techniques on the disparity image (GaussianBlur threshold dilate erode)
+        //Apply image processing techniques on the disparity image to smooth things out
 
         //FILL IN THE CODE
 
@@ -114,9 +114,9 @@ public:
 
         //FILL IN THE CODE
 
-        // optional hint: could use Use pointPolygonTest using the previous maxvalue location to compare with all contours found and get the actual brightest one
+        // optional hint: you could use pointPolygonTest and the previous maxvalue location to compare with all contours found and get the actual brightest one
 
-        //FILL IN THE CODE
+        //....
 
         // Use the result of pointPolygonTest or your own technique as the closest contour to:
         // 1 - draw it on the disparity image
