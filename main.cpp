@@ -143,9 +143,8 @@ public:
 
         outTargets.clear();
         
-        
-        if (outTargets.size() >0 )		 //send the bottle
-            targetPort.write();          //send the two processed images
+        if (outTargets.size() >0 )
+            targetPort.write();          
 
         IplImage out = disp;
         outImage.resize(out.width, out.height);
