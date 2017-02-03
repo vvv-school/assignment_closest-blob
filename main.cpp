@@ -92,13 +92,28 @@ public:
     /********************************************************/
     void onRead( yarp::sig::ImageOf<yarp::sig::PixelMono> &dispImage )
     {
+        yarp::sig::ImageOf<yarp::sig::PixelRgb> &outImage  = outPort.prepare();
+        yarp::sig::ImageOf<yarp::sig::PixelRgb> &cropOutImage  = cropOutPort.prepare();
+        yarp::os::Bottle &outTargets = targetPort.prepare();
+        
+        yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = inPort.read();
+
+        outImage.resize(dispImage.width(), dispImage.height());
+        cropOutImage.resize(dispImage.width(), dispImage.height());
+        
+        outImage.zero();
+        cropOutImage.zero();
+        
+        cv::Mat inColour_cv = cv::cvarrToMat((IplImage *)inImage->getIplImage());  // prepare the image ports and targets
+        cv::Mat inDisp_cv = cv::cvarrToMat((IplImage *)dispImage.getIplImage());
+        
+        
+        cv::Mat disp = inDisp_cv.clone();
+        
+        
         //FILL IN THE CODE
-        // prepare the image ports and targets
-        //read in from the rgb image something like: yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = inPort.read();
-
-        //convert from ImageOf to Mat
-
-        //Apply image processing techniques on the disparity image to smooth things out
+        
+        //Apply image processing techniques on the disparity image to smooth things out (cv::threshold)
 
         // Find the max value and its position and apply a threshold to remove the backgound
 
@@ -121,10 +136,23 @@ public:
         // (tl.x tl.y br.x br.y)
         //where tl is top left and br - bottom right
 
-        //FILL IN THE CODE
+        cvtColor(disp, disp, CV_GRAY2RGB);
 
-        //send the bottle
-        //send the two processed images
+        outTargets.clear();
+        
+        
+        if (outTargets.size() >0 )		 //send the bottle
+            targetPort.write();          //send the two processed images
+
+        IplImage out = disp;
+        outImage.resize(out.width, out.height);
+        cvCopy( &out, (IplImage *) outImage.getIplImage());
+        outPort.write();
+
+        IplImage crop = inColour_cv;
+        cropOutImage.resize(crop.width, crop.height);
+        cvCopy( &crop, (IplImage *) cropOutImage.getIplImage());
+        cropOutPort.write();
     }
 };
 
