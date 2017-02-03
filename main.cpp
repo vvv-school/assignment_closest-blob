@@ -110,16 +110,19 @@ public:
         
         cv::Mat disp = inDisp_cv.clone();
         
-        
         //FILL IN THE CODE
         
-        //Apply image processing techniques on the disparity image to smooth things out (cv::threshold)
+        // Apply image processing techniques on the disparity image to smooth things out 
+    
+        // Apply some threshold on the image to remove background:
+        // have a look at cv::threshold function
 
-        // Find the max value and its position and apply a threshold to remove the backgound
+        // Find the max value and its position
 
         //....
 
         //Find the contour of the closest objects with moments and mass center
+        //
         
         //....
 
@@ -132,7 +135,7 @@ public:
         // 2 - create a cropped image containing the rgb roi
         // 3 - fill in a yarp bottle with the bounding box
 
-        //be aware that the expected bottle should be a list containing:
+        //be aware that the expected Bottle should be a list containing:
         // (tl.x tl.y br.x br.y)
         //where tl is top left and br - bottom right
 
