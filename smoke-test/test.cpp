@@ -99,8 +99,9 @@ public:
             
             if (pTarget != NULL)
             {
-                
                 RTF_ASSERT_ERROR_IF(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
+                RTF_ASSERT_ERROR_IF(pTarget->get(0).asList()->size() == 4 , Asserter::format("GOT WRONG SIZE OF LISR %d: %s", pTarget->get(0).asList()->size(), pTarget->toString().c_str()));
+                
                 
                 double tlx = pTarget->get(0).asList()->get(0).asDouble();
                 double tly = pTarget->get(0).asList()->get(1).asDouble();
@@ -109,6 +110,8 @@ public:
 
                 int blobWidth = std::abs(brx - tlx);
                 int blobHeight = std::abs(bry - tly);
+
+                RTF_ASSERT_ERROR_IF((blobWidth > 0) && (blobHeight > 0), Asserter::format("GOT WRONG blob sizes %d: %d:", blobWidth,  blobHeight));
 
                 //RTF_TEST_REPORT(Asserter::format("GETTING BOUNDING BOX %lf %lf %lf %lf\n", tlx, tly, brx, bry));
 
@@ -195,7 +198,7 @@ public:
         totalPrecentage = totalPrecentage/5;
         RTF_TEST_REPORT(Asserter::format("TOTAL SUCCESS PERCENTAGE IS: %lf\n", totalPrecentage));
 
-        RTF_TEST_CHECK( totalPrecentage > 0.9 , "Checking passing of test");
+        RTF_TEST_CHECK( totalPrecentage > 0.85 , "Checking passing of test");
     }
 };
 
