@@ -45,16 +45,12 @@ class Processing : public yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::P
 
     yarp::os::RpcClient rpc;
 
-    int increment;
-    int frameNum;
-
 public:
     /********************************************************/
 
     Processing( const std::string &moduleName )
     {
         this->moduleName = moduleName;
-        increment = 0;
     }
 
     /********************************************************/
@@ -73,11 +69,6 @@ public:
         outPort.open("/"+ moduleName + "/image:o");
         cropOutPort.open("/" + moduleName + "/crop:o");
         targetPort.open("/"+ moduleName + "/target:o");
-        frameNum = 0;
-
-        rpc.open("/"+moduleName+"/rpcdata");
-
-        yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i");
 
         return true;
     }
@@ -101,22 +92,11 @@ public:
     /********************************************************/
     void onRead( yarp::sig::ImageOf<yarp::sig::PixelMono> &dispImage )
     {
-        yarp::sig::ImageOf<yarp::sig::PixelRgb> &outImage  = outPort.prepare();
-        yarp::sig::ImageOf<yarp::sig::PixelRgb> &cropOutImage  = cropOutPort.prepare();
-        yarp::os::Bottle &outTargets = targetPort.prepare();
 
-        yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = inPort.read();
+        // prepare the image ports and targets
+        //read in from the rgb image something like: yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = inPort.read();
 
-        outImage.resize(dispImage.width(), dispImage.height());
-        cropOutImage.resize(dispImage.width(), dispImage.height());
-
-        outImage.zero();
-        cropOutImage.zero();
-
-        cv::Mat inColour_cv = cv::cvarrToMat((IplImage *)inImage->getIplImage());
-        cv::Mat inDisp_cv = cv::cvarrToMat((IplImage *)dispImage.getIplImage());
-
-        cv::Mat disp = inDisp_cv.clone();
+        //convert from ImageOf to Mat
 
         //Apply image processing techniques on the disparity image (GaussianBlur threshold dilate erode)
 
@@ -144,32 +124,13 @@ public:
         // 3 - fill in a yarp bottle with the bounding box
 
         //be aware that the expected bottle should be a list containing:
-        //
         // (tl.x tl.y br.x br.y)
-        //
         //where tl is top left and br - bottom right
 
-        cvtColor(disp, disp, CV_GRAY2RGB);
-
-        outTargets.clear();
-
-        cv::Mat imageOutput(inColour_cv.size(), CV_8UC3, cv::Scalar(0,0,0));
         //FILL IN THE CODE
 
-        if (outTargets.size() >0 )
-            targetPort.write();
-
-        frameNum++;
-
-        IplImage out = disp;
-        outImage.resize(out.width, out.height);
-        cvCopy( &out, (IplImage *) outImage.getIplImage());
-        outPort.write();
-
-        IplImage crop = inColour_cv;
-        cropOutImage.resize(crop.width, crop.height);
-        cvCopy( &crop, (IplImage *) cropOutImage.getIplImage());
-        cropOutPort.write();
+        //send the bottle
+        //send the two processed images
     }
 };
 
