@@ -104,12 +104,8 @@ public:
 
         //....
 
-        //Find the contour of the closest objects
-
-        //....
-
-        // get moments and mass center
-
+        //Find the contour of the closest objects with moments and mass center
+        
         //....
 
         // optional hint: you could use pointPolygonTest and the previous maxvalue location to compare with all contours found and get the actual brightest one
