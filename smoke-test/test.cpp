@@ -7,8 +7,10 @@
 #include <cmath>
 #include <algorithm>
 
-#include <rtf/yarp/YarpTestCase.h>
+#include <yarp/rtf/TestCase.h>
 #include <rtf/dll/Plugin.h>
+#include <rtf/TestAssert.h>
+
 
 #include <yarp/os/Network.h>
 #include <yarp/os/ResourceFinder.h>
@@ -23,7 +25,7 @@
 using namespace RTF;
 
 /**********************************************************************/
-class TestAssignmentClosestBlob : public YarpTestCase
+class TestAssignmentClosestBlob : public yarp::rtf::TestCase
 {
     yarp::os::BufferedPort<yarp::os::Bottle> port;
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelMono> > dispPort;
@@ -33,7 +35,7 @@ class TestAssignmentClosestBlob : public YarpTestCase
 public:
     /******************************************************************/
     TestAssignmentClosestBlob() :
-        YarpTestCase("TestAssignmentClosestBlob")
+        yarp::rtf::TestCase("TestAssignmentClosestBlob")
     {
     }
 
