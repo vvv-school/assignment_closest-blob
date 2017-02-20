@@ -25,8 +25,8 @@ include_directories(${CMAKE_SOURCE_DIR}
                     ${YARP_HELPERS_INCLUDE_DIR}
                     ${OpenCV_INCLUDE_DIRS})
 
-# add required libraries
-link_libraries(${RTF_LIBRARIES} ${YARP_LIBRARIES} YARP::YARP_rtf  ${OpenCV_LIBRARIES})
-
 # add the source codes to build the plugin library
 add_library(${PROJECT_NAME} MODULE test.cpp)
+
+# add required libraries
+target_link_libraries(${PROJECT_NAME} ${RTF_LIBRARIES} ${YARP_LIBRARIES} YARP::YARP_rtf ${OpenCV_LIBRARIES})
