@@ -191,16 +191,31 @@ public:
             frameNum++;
         }
 
-        double totalPrecentage = 0.0;
+        double totalPercentage = 0.0;
         for( int i = 0; i < increment; i++ )
         {
             RTF_TEST_REPORT(Asserter::format("SUCCESS RATE IS: %lf ", successRate[i]));
-            totalPrecentage += successRate[i];
+            totalPercentage += successRate[i];
         }
-        totalPrecentage = totalPrecentage/5;
-        RTF_TEST_REPORT(Asserter::format("TOTAL SUCCESS PERCENTAGE IS: %lf\n", totalPrecentage));
+        totalPercentage = totalPercentage/5;
+        RTF_TEST_REPORT(Asserter::format("TOTAL SUCCESS PERCENTAGE IS: %lf\n", totalPercentage));
 
-        RTF_TEST_CHECK( totalPrecentage > 0.85 , "Checking passing of test");
+        //RTF_TEST_CHECK( totalPercentage > 0.9 , "Checking passing of test");
+        
+        int score = 0;
+        
+        if (totalPercentage > 0.95)
+            score = 20;
+        else if (totalPercentage > 0.90)
+            score = 15;
+        else if (totalPercentage > 0.80)
+            score = 10;
+        else if (totalPercentage > 0.70)
+            score = 5;
+        else if (totalPercentage > 0.60)
+            score = 1;
+        
+        RTF_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
     }
 };
 
