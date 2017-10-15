@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suit name="Test Assignment detection of the closest blob">
+<suite name="Test Assignment detection of the closest blob">
     <description>Testing the assignment on detection of the closest blob </description>
     <fixture param="--fixture fixture.xml"> yarpmanager </fixture>
 
     <test type="dll"> TestAssignmentClosestBlob </test>
-</suit>
+</suite>
