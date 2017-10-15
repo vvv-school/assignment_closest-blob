@@ -55,10 +55,10 @@ public:
 
         dispPort.open("/"+getName()+"/disp:i");
 
-        RTF_ASSERT_ERROR_IF(yarp::os::Network::connect("/closest-blob/target:o", port.getName() ), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF(yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i"), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF(yarp::os::Network::connect("/icub/camcalib/left/out", imagePort.getName()), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF(yarp::os::Network::connect("/SFM/disp:o", dispPort.getName() ), "Unable to connect to target!");
+        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/closest-blob/target:o", port.getName() ), "Unable to connect to target!");
+        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i"), "Unable to connect to target!");
+        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/icub/camcalib/left/out", imagePort.getName()), "Unable to connect to target!");
+        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/SFM/disp:o", dispPort.getName() ), "Unable to connect to target!");
 
         return true;
     }
@@ -101,8 +101,8 @@ public:
             
             if (pTarget != NULL)
             {
-                RTF_ASSERT_ERROR_IF(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
-                RTF_ASSERT_ERROR_IF(pTarget->get(0).asList()->size() == 4 , Asserter::format("GOT WRONG SIZE OF LISR %d: %s", pTarget->get(0).asList()->size(), pTarget->toString().c_str()));
+                RTF_ASSERT_ERROR_IF_FALSE(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
+                RTF_ASSERT_ERROR_IF_FALSE(pTarget->get(0).asList()->size() == 4 , Asserter::format("GOT WRONG SIZE OF LISR %d: %s", pTarget->get(0).asList()->size(), pTarget->toString().c_str()));
                 
                 
                 double tlx = pTarget->get(0).asList()->get(0).asDouble();
@@ -113,7 +113,7 @@ public:
                 int blobWidth = std::abs(brx - tlx);
                 int blobHeight = std::abs(bry - tly);
 
-                RTF_ASSERT_ERROR_IF((blobWidth > 0) && (blobHeight > 0), Asserter::format("GOT WRONG blob sizes %d: %d:", blobWidth,  blobHeight));
+                RTF_ASSERT_ERROR_IF_FALSE((blobWidth > 0) && (blobHeight > 0), Asserter::format("GOT WRONG blob sizes %d: %d:", blobWidth,  blobHeight));
 
                 //RTF_TEST_REPORT(Asserter::format("GETTING BOUNDING BOX %lf %lf %lf %lf\n", tlx, tly, brx, bry));
 
