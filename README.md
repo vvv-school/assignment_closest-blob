@@ -57,4 +57,19 @@ $ cd datasets
 $ wget http://www.icub.org/download/software/datasetplayer-demo/dataDisparity.zip
 $ unzip dataDisparity.zip
 ```
+
+## Grading
+Here's the score map:
+
+| Requirements             | Points |
+|:------------------------:|:-:|
+| Percentage >60           | 1 |
+| Percentage >60 and < 70  | 5 |
+| Percentage >70 and < 80  | 10|
+| Percentage >80 and < 90  | 15|
+| Percentage >90           | 20|
+|                          |   |
+| **Maximum score**        | 20 :trophy: |
+
+
 # [How to complete the assignment](https://github.com/vvv-school/vvv-school.github.io/blob/master/instructions/how-to-complete-assignments.md)
