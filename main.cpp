@@ -105,10 +105,7 @@ public:
         cropOutImage.zero();
         
         cv::Mat inColour_cv = cv::cvarrToMat((IplImage *)inImage->getIplImage());  // prepare the image ports and targets
-        cv::Mat inDisp_cv = cv::cvarrToMat((IplImage *)dispImage.getIplImage());
-        
-        
-        cv::Mat disp = inDisp_cv.clone();
+        cv::Mat disp = cv::cvarrToMat((IplImage *)dispImage.getIplImage());
         
         //FILL IN THE CODE
         
