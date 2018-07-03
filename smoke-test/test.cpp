@@ -85,7 +85,7 @@ public:
         yarp::os::ResourceFinder rf;
         rf.setDefaultContext("closest-blob");
         rf.setVerbose();
-        rf.setDefaultContext(rf.getContext().c_str());
+        rf.setDefaultContext(rf.getContext());
 
         int increment = 0;
 
@@ -156,7 +156,7 @@ public:
                     std::string histogramFile = oss.str();
                     RTF_TEST_REPORT(Asserter::format("HISTOGRAM NAME IS: %s\n", histogramFile.c_str()));
                     //std::string histogramFile = "histogram_file" + std::to_string(increment+1) + ".yml";
-                    std::string histogramPath = rf.findFile(histogramFile.c_str());
+                    std::string histogramPath = rf.findFile(histogramFile);
 
                     RTF_TEST_REPORT(Asserter::format("HISTOGRAM PATH IS: %s\n", histogramPath.c_str()));
                     // load file

@@ -15,6 +15,8 @@
  * Public License for more details
  */
 
+#include <cstdlib>
+
 #include <yarp/os/BufferedPort.h>
 #include <yarp/os/ResourceFinder.h>
 #include <yarp/os/RFModule.h>
@@ -181,7 +183,7 @@ public:
         std::string moduleName = rf.check("name", yarp::os::Value("closest-blob"), "module name (string)").asString();
         setName(moduleName.c_str());
 
-        rpcPort.open(("/"+getName("/rpc")).c_str());
+        rpcPort.open("/"+getName("/rpc"));
 
         closing = false;
 
@@ -232,7 +234,7 @@ int main(int argc, char *argv[])
     if (!yarp.checkNetwork())
     {
         yError("YARP server not available!");
-        return 1;
+        return EXIT_FAILURE;
     }
 
     Module module;
