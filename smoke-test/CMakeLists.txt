@@ -12,7 +12,7 @@ set(CMAKE_SHARED_MODULE_PREFIX "")
 
 # add the required cmake packages
 find_package(RTF 1.3 COMPONENTS DLL)
-find_package(YARP 3.0.0 REQUIRED COMPONENTS OS sig dev math rtf)
+find_package(YARP 3.1.100 REQUIRED COMPONENTS OS sig dev math cv rtf)
 find_package(OpenCV REQUIRED)
 
 # add include directories

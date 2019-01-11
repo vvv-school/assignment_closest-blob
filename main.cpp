@@ -27,6 +27,7 @@
 #include <yarp/os/Semaphore.h>
 #include <yarp/sig/Image.h>
 #include <yarp/os/RpcClient.h>
+#include <yarp/cv/Cv.h>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
@@ -106,8 +107,8 @@ public:
         outImage.zero();
         cropOutImage.zero();
         
-        cv::Mat inColour_cv = cv::cvarrToMat((IplImage *)inImage->getIplImage());  // prepare the image ports and targets
-        cv::Mat disp = cv::cvarrToMat((IplImage *)dispImage.getIplImage());
+        cv::Mat inColour_cv = yarp::cv::toCvMat(*inImage);  // prepare the image ports and targets
+        cv::Mat disp = yarp::cv::toCvMat(dispImage);
         
         //FILL IN THE CODE
         
@@ -143,16 +144,12 @@ public:
         outTargets.clear();
         
         if (outTargets.size() >0 )
-            targetPort.write();          
+            targetPort.write();
 
-        IplImage out = disp;
-        outImage.resize(out.width, out.height);
-        cvCopy( &out, (IplImage *) outImage.getIplImage());
+        outImage=yarp::cv::fromCvMat<yarp::sig::PixelRgb>(disp);
         outPort.write();
 
-        IplImage crop = inColour_cv;
-        cropOutImage.resize(crop.width, crop.height);
-        cvCopy( &crop, (IplImage *) cropOutImage.getIplImage());
+        cropOutImage=yarp::cv::fromCvMat<yarp::sig::PixelRgb>(inColour_cv);
         cropOutPort.write();
     }
 };

@@ -18,6 +18,7 @@
 #include <yarp/os/BufferedPort.h>
 #include <yarp/os/Time.h>
 #include <yarp/sig/Image.h>
+#include <yarp/cv/Cv.h>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
@@ -120,7 +121,7 @@ public:
                 if (frameNum == frameArray[increment] +1 )
                 {
                     yarp::sig::ImageOf<yarp::sig::PixelRgb> *inImage = imagePort.read();
-                    cv::Mat inColour_cv = cv::cvarrToMat((IplImage *)inImage->getIplImage());
+                    cv::Mat inColour_cv = yarp::cv::toCvMat(*inImage);
 
                     cv::Rect roi(tlx, tly, blobWidth, blobHeight);
                     cv::Mat image_roi(inColour_cv, roi);
