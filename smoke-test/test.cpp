@@ -7,9 +7,9 @@
 #include <cmath>
 #include <algorithm>
 
-#include <yarp/rtf/TestCase.h>
-#include <rtf/dll/Plugin.h>
-#include <rtf/TestAssert.h>
+#include <yarp/robottestingframework/TestCase.h>
+#include <robottestingframework/dll/Plugin.h>
+#include <robottestingframework/TestAssert.h>
 
 
 #include <yarp/os/Network.h>
@@ -23,10 +23,10 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
 
-using namespace RTF;
+using namespace robottestingframework;
 
 /**********************************************************************/
-class TestAssignmentClosestBlob : public yarp::rtf::TestCase
+class TestAssignmentClosestBlob : public yarp::robottestingframework::TestCase
 {
     yarp::os::BufferedPort<yarp::os::Bottle> port;
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelMono> > dispPort;
@@ -36,7 +36,7 @@ class TestAssignmentClosestBlob : public yarp::rtf::TestCase
 public:
     /******************************************************************/
     TestAssignmentClosestBlob() :
-        yarp::rtf::TestCase("TestAssignmentClosestBlob")
+        yarp::robottestingframework::TestCase("TestAssignmentClosestBlob")
     {
     }
 
@@ -56,10 +56,10 @@ public:
 
         dispPort.open("/"+getName()+"/disp:i");
 
-        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/closest-blob/target:o", port.getName() ), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i"), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/icub/camcalib/left/out", imagePort.getName()), "Unable to connect to target!");
-        RTF_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/SFM/disp:o", dispPort.getName() ), "Unable to connect to target!");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/closest-blob/target:o", port.getName() ), "Unable to connect to target!");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i"), "Unable to connect to target!");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/icub/camcalib/left/out", imagePort.getName()), "Unable to connect to target!");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/SFM/disp:o", dispPort.getName() ), "Unable to connect to target!");
 
         return true;
     }
@@ -76,12 +76,12 @@ public:
     /******************************************************************/
     virtual void run()
     {
-        RTF_TEST_REPORT("sending PLAY to the dataset player");
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT("sending PLAY to the dataset player");
         yarp::os::Bottle cmd, reply;
         cmd.addString("play");
         rpc.write(cmd,reply);
 
-        RTF_TEST_REPORT(Asserter::format("Reply from datasetplayer is: %s\n", reply.toString().c_str()));
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Reply from datasetplayer is: %s\n", reply.toString().c_str()));
 
         yarp::os::ResourceFinder rf;
         rf.setDefaultContext("closest-blob");
@@ -90,7 +90,7 @@ public:
 
         int increment = 0;
 
-        RTF_TEST_REPORT("Checking target position in the image");
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT("Checking target position in the image");
 
         int frameArray[5] = {50, 118, 300, 340, 610};
         double successRate[5];
@@ -102,8 +102,8 @@ public:
             
             if (pTarget != NULL)
             {
-                RTF_ASSERT_ERROR_IF_FALSE(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
-                RTF_ASSERT_ERROR_IF_FALSE(pTarget->get(0).asList()->size() == 4 , Asserter::format("GOT WRONG SIZE OF LISR %d: %s", pTarget->get(0).asList()->size(), pTarget->toString().c_str()));
+                ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(pTarget->size() == 1, Asserter::format("GOT WRONG SIZE OF BOTTLE %d: %s", pTarget->size(), pTarget->toString().c_str()));
+                ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(pTarget->get(0).asList()->size() == 4 , Asserter::format("GOT WRONG SIZE OF LISR %d: %s", pTarget->get(0).asList()->size(), pTarget->toString().c_str()));
                 
                 
                 double tlx = pTarget->get(0).asList()->get(0).asDouble();
@@ -114,9 +114,9 @@ public:
                 int blobWidth = std::abs(brx - tlx);
                 int blobHeight = std::abs(bry - tly);
 
-                RTF_ASSERT_ERROR_IF_FALSE((blobWidth > 0) && (blobHeight > 0), Asserter::format("GOT WRONG blob sizes %d: %d:", blobWidth,  blobHeight));
+                ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE((blobWidth > 0) && (blobHeight > 0), Asserter::format("GOT WRONG blob sizes %d: %d:", blobWidth,  blobHeight));
 
-                //RTF_TEST_REPORT(Asserter::format("GETTING BOUNDING BOX %lf %lf %lf %lf\n", tlx, tly, brx, bry));
+                //ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("GETTING BOUNDING BOX %lf %lf %lf %lf\n", tlx, tly, brx, bry));
 
                 if (frameNum == frameArray[increment] +1 )
                 {
@@ -155,11 +155,11 @@ public:
                     oss << "histogram_file" << increment+1 << ".yml";
 
                     std::string histogramFile = oss.str();
-                    RTF_TEST_REPORT(Asserter::format("HISTOGRAM NAME IS: %s\n", histogramFile.c_str()));
+                    ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("HISTOGRAM NAME IS: %s\n", histogramFile.c_str()));
                     //std::string histogramFile = "histogram_file" + std::to_string(increment+1) + ".yml";
                     std::string histogramPath = rf.findFile(histogramFile);
 
-                    RTF_TEST_REPORT(Asserter::format("HISTOGRAM PATH IS: %s\n", histogramPath.c_str()));
+                    ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("HISTOGRAM PATH IS: %s\n", histogramPath.c_str()));
                     // load file
                     cv::MatND hist_base;
 
@@ -188,20 +188,20 @@ public:
                     successRate[increment-1] = comparison;
                 }
             }
-            //RTF_TEST_REPORT(Asserter::format("FRAME NUMBER IS [%d]\n", frameNum));
+            //ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("FRAME NUMBER IS [%d]\n", frameNum));
             frameNum++;
         }
 
         double totalPercentage = 0.0;
         for( int i = 0; i < increment; i++ )
         {
-            RTF_TEST_REPORT(Asserter::format("SUCCESS RATE IS: %lf ", successRate[i]));
+            ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("SUCCESS RATE IS: %lf ", successRate[i]));
             totalPercentage += successRate[i];
         }
         totalPercentage = totalPercentage/5;
-        RTF_TEST_REPORT(Asserter::format("TOTAL SUCCESS PERCENTAGE IS: %lf\n", totalPercentage));
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("TOTAL SUCCESS PERCENTAGE IS: %lf\n", totalPercentage));
 
-        //RTF_TEST_CHECK( totalPercentage > 0.9 , "Checking passing of test");
+        //ROBOTTESTINGFRAMEWORK_TEST_CHECK( totalPercentage > 0.9 , "Checking passing of test");
         
         int score = 0;
         
@@ -216,8 +216,8 @@ public:
         else if (totalPercentage > 0.60)
             score = 1;
         
-        RTF_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
+        ROBOTTESTINGFRAMEWORK_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
     }
 };
 
-PREPARE_PLUGIN(TestAssignmentClosestBlob)
+ROBOTTESTINGFRAMEWORK_PREPARE_PLUGIN(TestAssignmentClosestBlob)
