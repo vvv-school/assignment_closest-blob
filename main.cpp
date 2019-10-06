@@ -24,7 +24,6 @@
 #include <yarp/os/Log.h>
 #include <yarp/os/Time.h>
 #include <yarp/os/LogStream.h>
-#include <yarp/os/Semaphore.h>
 #include <yarp/sig/Image.h>
 #include <yarp/os/RpcClient.h>
 #include <yarp/cv/Cv.h>
