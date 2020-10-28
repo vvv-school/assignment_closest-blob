@@ -1,7 +1,9 @@
 Robot vision with YARP & OpenCV Assignment
 ==========================
 
-[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/vvv-school/assignment_closest-blob/master?grs=github&t=moon)
+[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/vvv-school/assignment_closest-blob/master?grs=github&t=moon) 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vvv-school/assignment_closest-blob)
+
 
 # Prerequisites
 By now, you should be familiar with playing around with images processing such as:
