@@ -19,4 +19,5 @@ fi
 
 yarpdataplayer &
 sleep 3
-echo "load $ROBOT_CODE/datasets/dataDisparity" | yarp rpc /yarpdataplayer/rpc:i
+#echo "load $ROBOT_CODE/datasets/dataDisparity" | yarp rpc /yarpdataplayer/rpc:i
+echo "load /workspace/datasets/dataDisparity" | yarp rpc /yarpdataplayer/rpc:i
