@@ -6,29 +6,23 @@
         <author email="vadim.tikhanoff@iit.it">Vadim Tikhanoff</author>
     </authors>
     <module>
+        <name>yarpdataplayer</name>
+        <node>testnode</node>
+    </module>
+    <module>
         <name>closest-blob</name>
-        <node>localhost</node>
+        <node>testnode</node>
     </module>
     <module>
         <name>yarpview</name>
-        <node>localhost</node>
+        <node>testnode</node>
         <parameters>--name /output --x 0 --y 0 --RefreshTime 33 </parameters>
     </module>
     <module>
         <name>yarpview</name>
-        <node>localhost</node>
+        <node>testnode</node>
         <parameters>--name /crop --x 300 --y 0 --RefreshTime 33 </parameters>
     </module>
-    <connection>
-        <from>/SFM/disp:o</from>
-        <to>/closest-blob/disparity:i</to>
-        <protocol>tcp</protocol>
-    </connection>
-    <connection>
-        <from>/icub/camcalib/left/out</from>
-        <to>/closest-blob/image:i</to>
-        <protocol>tcp</protocol>
-    </connection>
     <connection>
         <from>/closest-blob/image:o</from>
         <to>/output</to>

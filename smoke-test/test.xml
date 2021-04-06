@@ -4,5 +4,5 @@
     <description>Testing the assignment on detection of the closest blob </description>
     <fixture param="--fixture fixture.xml"> yarpmanager </fixture>
 
-    <test type="dll"> TestAssignmentClosestBlob </test>
+    <test type="dll" param="--dataset dataDisparity"> TestAssignmentClosestBlob </test>
 </suite>

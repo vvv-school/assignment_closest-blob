@@ -4,6 +4,8 @@
  * CopyPolicy: Released under the terms of the GNU GPL v3.0.
 */
 
+#include <cstdlib>
+#include <string>
 #include <cmath>
 #include <algorithm>
 
@@ -28,6 +30,7 @@ using namespace robottestingframework;
 /**********************************************************************/
 class TestAssignmentClosestBlob : public yarp::robottestingframework::TestCase
 {
+
     yarp::os::BufferedPort<yarp::os::Bottle> port;
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelMono> > dispPort;
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > imagePort;
@@ -48,6 +51,11 @@ public:
     /******************************************************************/
     virtual bool setup(yarp::os::Property& property)
     {
+    
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(property.check("dataset"),"Dataset is unspecified!");
+        std::string path = std::getenv("DATASETS_PATH");
+        std::string dataset = property.find("dataset").asString();
+        
         port.open("/"+getName()+"/target:i");
 
         rpc.open("/"+getName()+"/rpc");
@@ -58,8 +66,26 @@ public:
 
         ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/closest-blob/target:o", port.getName() ), "Unable to connect to target!");
         ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect(rpc.getName(), "/yarpdataplayer/rpc:i"), "Unable to connect to target!");
+        
+        yarp::os::Bottle cmd,rep;
+        cmd.addString("load");
+        cmd.addString(path+"/"+dataset);
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Loading %s ...",cmd.toString().c_str()));
+        rpc.write(cmd,rep);
+        
         ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/icub/camcalib/left/out", imagePort.getName()), "Unable to connect to target!");
         ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/SFM/disp:o", dispPort.getName() ), "Unable to connect to target!");
+      
+        //connect ports to closest-blob
+         
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/icub/camcalib/left/out", "/closest-blob/image:i"), "Unable to connect to target!");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(yarp::os::Network::connect("/SFM/disp:o", "/closest-blob/disparity:i" ), "Unable to connect to target!");
+        
+        cmd.clear();
+        cmd.addString("play");
+        rpc.write(cmd,rep);
+
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Reply from datasetplayer is: %s\n", rep.toString().c_str()));
 
         return true;
     }
@@ -76,13 +102,7 @@ public:
     /******************************************************************/
     virtual void run()
     {
-        ROBOTTESTINGFRAMEWORK_TEST_REPORT("sending PLAY to the dataset player");
-        yarp::os::Bottle cmd, reply;
-        cmd.addString("play");
-        rpc.write(cmd,reply);
-
-        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Reply from datasetplayer is: %s\n", reply.toString().c_str()));
-
+        
         yarp::os::ResourceFinder rf;
         rf.setDefaultContext("closest-blob");
         rf.setVerbose();
