@@ -52,12 +52,12 @@ Once done, you can test your code in two ways:
 ## IMPORTANT Notes
 
 You will need to run the dataset **dataDisparity** in:
-```
-cd $ROBOT_CODE
-$ cd datasets
+```sh
 $ wget http://www.icub.org/download/software/datasetplayer-demo/dataDisparity.zip
 $ unzip dataDisparity.zip
 ```
+
+Finally, create the env var `DATASETS_PATH` pointing to the location where you've unzipped the archive.
 
 ## Grading
 Here's the score map:
