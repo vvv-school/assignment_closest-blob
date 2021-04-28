@@ -49,6 +49,9 @@ class Processing : public yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::P
 
     yarp::os::RpcClient rpc;
 
+    cv::Mat inColour_cv;
+    cv::Mat disp;
+
 public:
     /********************************************************/
 
@@ -108,8 +111,8 @@ public:
         outImage.zero();
         cropOutImage.zero();
         
-        cv::Mat inColour_cv = yarp::cv::toCvMat(*inImage);  // prepare the image ports and targets
-        cv::Mat disp = yarp::cv::toCvMat(dispImage);
+        inColour_cv = yarp::cv::toCvMat(*inImage);  // prepare the image ports and targets
+        disp = yarp::cv::toCvMat(dispImage);
         
         //FILL IN THE CODE
         
