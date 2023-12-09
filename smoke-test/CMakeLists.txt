@@ -24,4 +24,4 @@ include_directories(${CMAKE_SOURCE_DIR}
 add_library(${PROJECT_NAME} MODULE test.cpp)
 
 # add required libraries
-target_link_libraries(${PROJECT_NAME} ${RobotTestingFramework_LIBRARIES} ${YARP_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${RobotTestingFramework_LIBRARIES} ${YARP_LIBRARIES} ${OpenCV_LIBS})
